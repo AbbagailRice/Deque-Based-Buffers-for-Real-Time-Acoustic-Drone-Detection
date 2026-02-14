@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+# pytest cache
+.pytest_cache/
+
 # Optional: ignore virtual environments
 venv/
 .env
