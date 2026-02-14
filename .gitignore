@@ -1,0 +1,11 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Optional: ignore virtual environments
+venv/
+.env
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
