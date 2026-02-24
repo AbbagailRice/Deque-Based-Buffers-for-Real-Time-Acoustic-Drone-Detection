@@ -22,7 +22,7 @@ This project explores a deterministic, lightweight approach to real-time acousti
 - **Analysis:** "Current" window is checked against the "Previous" card in the deque to detect sudden acoustic spikes.
 
 
-## Inside Detect.py, you can tweak these three lines to try to improve res:
+## Inside config.ini, you can tweak these three lines to try to improve res:
 
 TARGET_FREQ = 265: Set this to Hz of the drone motors you are detecting.
 
@@ -34,3 +34,20 @@ MIN_MATCH_RATIO = 0.6: Higher means fewer false positives; lower means it’s ea
 - Python 3.10+
 - PyAudio / PyAudioWPatch
 - NumPy
+## note: 
+Richard got an error trying to install pyaudio (running debian vm)
+it requierd this fix:
+sudo apt update
+sudo apt install portaudio19-dev libasound-dev libjack-jackd2-dev
+
+## running the script
+### setup venv (linux)
+python3 -m venv venv
+source venv/bin/activate
+### install dependencies 
+pip install -r requirements.txt
+### run the script
+python3 main.py
+#### note:
+-you can use basic cli functions like -h
+-config.ini holds default values if you want to modify them
