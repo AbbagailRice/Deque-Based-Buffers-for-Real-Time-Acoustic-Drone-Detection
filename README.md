@@ -43,12 +43,13 @@ it requierd this fix:
 ## running the script
 ### setup venv (linux)
 `python3 -m venv venv`
+
 `source venv/bin/activate`
 ### install dependencies 
 `pip install -r requirements.txt`
 ### run the script
 `python3 main.py`
 #### note:
--you can use basic cli functions like -h
--config.ini holds default values if you want to modify them
--to exit, press enter
+- you can use basic cli functions like -h
+- config.ini holds default values if you want to modify them
+- to exit, press enter
