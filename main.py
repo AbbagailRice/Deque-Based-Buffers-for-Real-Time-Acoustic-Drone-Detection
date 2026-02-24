@@ -15,6 +15,7 @@ Description:
 
 import argparse
 import configparser
+import threading
 from Detect import run_drone_detection
 
 def function():
@@ -64,6 +65,7 @@ def parse_args() -> argparse.Namespace:
     )
 
     return parser.parse_args()
+
 def main():
     """
     Input: None
@@ -72,10 +74,20 @@ def main():
         Execute real-time drone detection loop using parameters
         loaded from configuration file, with optional command-line overrides.
     """
-
+    #vars
     args = parse_args()
     config = load_config(args.config)
-    run_drone_detection(config)
+    #threading
+    stop_event = threading.Event()
+
+    # Run detection in a background thread
+    detection_thread = threading.Thread(target=run_drone_detection, args=(config, stop_event))
+    detection_thread.start()
+
+    # Keep running until the user presses Enter
+    input("Press Enter to stop detection...\n")
+    stop_event.set()
+    detection_thread.join()
 
 
 if __name__ == "__main__":

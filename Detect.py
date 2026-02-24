@@ -11,18 +11,21 @@ CHANNELS = 1
 RATE = 48000
 CHUNK = int(RATE * 0.5)  # 0.5 second chunks
 
-def run_drone_detection(config):
+def run_drone_detection(config, stop_event: threading.Event = None):
     """
-    Run live drone detection. Type 'end' to stop.
+    Run live drone detection. press enter to stop.
     """
-
+    #vars
+    #vars from config
     target_freq = config["TARGET_FREQ"]
     threshold = config["THRESHOLD"]
     window_size = config["WINDOW_SIZE"]
     min_match_ratio = config["MIN_MATCH_RATIO"]
+    #other vars
     history = deque(maxlen=window_size)
     running = True
-
+    """
+    #old stop controller
     def monitor_input():
         nonlocal running
         while True:
@@ -33,17 +36,20 @@ def run_drone_detection(config):
 
     # Start input listener thread
     threading.Thread(target=monitor_input, daemon=True).start()
-
+    """
     # Initialize PyAudio
     p = pyaudio.PyAudio()
     stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE,
                     input=True, frames_per_buffer=CHUNK)
 
     print(f"Started drone detection (@{RATE}Hz)")
-    print("Type 'end' and press Enter to stop.")
+    #print("Type 'end' and press Enter to stop.")
 
     try:
         while running:
+            if stop_event and stop_event.is_set():
+                break
+            
             start_time = time.perf_counter()
 
             # Read audio
