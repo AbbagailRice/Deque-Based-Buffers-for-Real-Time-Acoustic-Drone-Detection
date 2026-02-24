@@ -43,7 +43,16 @@ def load_config(config_path: str = "config.ini") -> dict:
         "TARGET_FREQ": int(config.get("DETECTION", "TARGET_FREQ", fallback=265)),
         "THRESHOLD": int(config.get("DETECTION", "THRESHOLD", fallback=15)),
         "WINDOW_SIZE": int(config.get("DETECTION", "WINDOW_SIZE", fallback=10)),
-        "MIN_MATCH_RATIO": float(config.get("DETECTION", "MIN_MATCH_RATIO", fallback=0.6))
+        "MIN_MATCH_RATIO": float(config.get("DETECTION", "MIN_MATCH_RATIO", fallback=0.6)),
+        "FORMAT": config.get("DETECTION", "FORMAT", fallback="paInt16"),
+        "CHANNELS": int(config.get("DETECTION", "CHANNELS", fallback=1)),
+        "RATE": int(config.get("DETECTION", "RATE", fallback=48000)),
+        "CHUNK_SEC": float(config.get("DETECTION", "CHUNK_SEC", fallback=0.5)),
+        # Noise / magic numbers
+        "MIN_FREQ": int(config.get("DETECTION", "MIN_FREQ", fallback=150)),
+        "PRINT_FREQ_DECIMALS": int(config.get("DETECTION", "PRINT_FREQ_DECIMALS", fallback=2)),
+        "PRINT_CONF_DECIMALS": int(config.get("DETECTION", "PRINT_CONF_DECIMALS", fallback=0)),
+        "PRINT_TIME_DECIMALS": int(config.get("DETECTION", "PRINT_TIME_DECIMALS", fallback=5)),
     }
 def parse_args() -> argparse.Namespace:
     """
