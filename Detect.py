@@ -5,8 +5,6 @@ from collections import deque
 from threading import Event
 import time
 
-
-
 def run_drone_detection(config, stop_event: Event = None):
     """
     Run live drone detection. press enter to stop.
@@ -79,6 +77,8 @@ def run_drone_detection(config, stop_event: Event = None):
             match_ratio = matches / len(history)
 
             exec_time = time.perf_counter() - start_time
+            proc_time_ms = (exec_time - start_time) * 1000
+            print(f"Math took: {proc_time_ms:.4f} ms")
 
             # Detection feedback
             if len(history) == window_size and match_ratio >= min_match_ratio:
